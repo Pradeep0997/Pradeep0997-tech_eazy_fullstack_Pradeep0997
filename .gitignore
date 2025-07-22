@@ -1,0 +1,34 @@
+# Node modules
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Logs
+*.log
+logs/
+*.log.*
+pids
+*.pid
+
+# dotenv
+.env
+
+# SQLite DB
+*.sqlite
+*.db
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# Optional cache folders
+.cache/
+dist/
+build/
+
+# Postman temp files
+*.postman_collection_backup.json

@@ -1,0 +1,85 @@
+{
+  "info": {
+    "name": "Parcel Management API",
+    "_postman_id": "12345678-abcd-1234-efgh-123456abcdef",
+    "description": "Test collection for TechEazy Internship Parcel API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Parcel",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"trackingId\": \"P123\",\n  \"sender\": \"Pradeep\",\n  \"receiver\": \"Rahul\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/parcels",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["parcels"]
+        }
+      }
+    },
+    {
+      "name": "Get All Parcels",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:3000/parcels",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["parcels"]
+        }
+      }
+    },
+    {
+      "name": "Get Parcel by ID",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:3000/parcels/P123",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["parcels", "P123"]
+        }
+      }
+    },
+    {
+      "name": "Update Parcel",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"sender\": \"Pradeep Kumar\",\n  \"status\": \"delivered\" \n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/parcels/P123",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["parcels", "P123"]
+        }
+      }
+    },
+    {
+      "name": "Delete Parcel",
+      "request": {
+        "method": "DELETE",
+        "url": {
+          "raw": "http://localhost:3000/parcels/P123",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["parcels", "P123"]
+        }
+      }
+    }
+  ]
+}
