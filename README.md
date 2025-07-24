@@ -1,4 +1,4 @@
-# TechEazy Internship – Parcel Management System
+# TechEazy Internship – Zero Mile Delivery System
 
 This is a fullstack Parcel Management System built as part of the TechEazy internship selection process.
 
@@ -6,6 +6,7 @@ This is a fullstack Parcel Management System built as part of the TechEazy inter
 
 ## 📁 Project Structure
 
+```
 tech_eazy_fullstack_Pradeep0997/
 ├── backend/
 │ ├── server.js
@@ -21,7 +22,7 @@ tech_eazy_fullstack_Pradeep0997/
 │ ├── app.js
 │ └── style.css
 
-
+```
 
 ---
 
@@ -56,10 +57,17 @@ POST	/parcels	Create new parcel
 PUT	/parcels/:id	Update parcel
 DELETE	/parcels/:id	Delete parcel
 
+
+---
+
 ## 📮 Postman Collection
+
 You can import postman_collection.json in Postman to test the APIs manually.
 
+
+---
 ## 💡 Tech Stack
+
 Node.js
 
 Express
@@ -78,5 +86,7 @@ HTML, CSS, JavaScript
 
 
 Settipalle Pradeep Reddy
+
+
 GitHub: Pradeep0997
 
