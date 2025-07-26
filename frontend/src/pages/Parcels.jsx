@@ -2,89 +2,93 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../styles/Parcels.css";
 
-const API_URL = "http://localhost:3000/parcels";
-
-export default function Parcels() {
-  const [form, setForm] = useState({
-    trackingId: "",
-    sender: "",
-    receiver: "",
-    status: "in transit",
-  });
-
+function Parcels() {
   const [parcels, setParcels] = useState([]);
-  const [filterStatus, setFilterStatus] = useState("all");
+  const [form, setForm] = useState({ trackingId: "", sender: "", receiver: "", status: "in transit" });
+  const [filter, setFilter] = useState("all");
+
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    fetchParcels();
+  }, []);
 
   const fetchParcels = async () => {
-    const res = await axios.get(API_URL);
-    setParcels(res.data);
+    try {
+      const res = await axios.get("http://localhost:3000/api/parcels", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setParcels(res.data);
+    } catch (err) {
+      console.error("Fetch error:", err.message);
+    }
   };
 
   const handleChange = (e) => {
-  const key = e.target.id || e.target.name;
-  setForm({ ...form, [key]: e.target.value });
-};
+    setForm({ ...form, [e.target.id]: e.target.value });
+  };
 
   const handleCreate = async () => {
     try {
-      await axios.post(API_URL, form);
-      alert("Parcel created!");
+      await axios.post("http://localhost:3000/api/parcels", form, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setForm({ trackingId: "", sender: "", receiver: "", status: "in transit" });
       fetchParcels();
     } catch (err) {
-      alert("Create error");
+      console.error("Create error:", err.message);
     }
   };
 
   const handleUpdate = async () => {
     try {
-      await axios.put(`${API_URL}/${form.trackingId}`, form);
-      alert("Parcel updated!");
+      await axios.put(`http://localhost:3000/api/parcels/${form.trackingId}`, form, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setForm({ trackingId: "", sender: "", receiver: "", status: "in transit" });
       fetchParcels();
     } catch (err) {
-      alert("Update error");
+      console.error("Update error:", err.message);
     }
   };
 
   const handleDelete = async (id) => {
-    await axios.delete(`${API_URL}/${id}`);
-    fetchParcels();
+    try {
+      await axios.delete(`http://localhost:3000/api/parcels/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      fetchParcels();
+    } catch (err) {
+      console.error("Delete error:", err.message);
+    }
   };
 
   const handleEdit = (p) => {
     setForm(p);
   };
 
-  const filteredParcels = filterStatus === "all"
-    ? parcels
-    : parcels.filter((p) => p.status === filterStatus);
-
-  useEffect(() => {
-    fetchParcels();
-  }, []);
+  const filtered = filter === "all" ? parcels : parcels.filter((p) => p.status === filter);
 
   return (
-    <div className="container">
-      <h1>Parcel Management</h1>
-
-      <form className="form">
-        <input id="trackingId" value={form.trackingId} onChange={handleChange} placeholder="Tracking ID" />
-        <input id="sender" value={form.sender} onChange={handleChange} placeholder="Sender" />
-        <input id="receiver" value={form.receiver} onChange={handleChange} placeholder="Receiver" />
+    <div className="parcel-container">
+      <h2>Parcel Manager</h2>
+      <form className="parcel-form">
+        <input id="trackingId" value={form.trackingId} onChange={handleChange} placeholder="Tracking ID" required />
+        <input id="sender" value={form.sender} onChange={handleChange} placeholder="Sender" required />
+        <input id="receiver" value={form.receiver} onChange={handleChange} placeholder="Receiver" required />
         <select id="status" value={form.status} onChange={handleChange}>
           <option value="in transit">In Transit</option>
           <option value="delivered">Delivered</option>
           <option value="cancelled">Cancelled</option>
         </select>
-        <div>
+        <div className="form-buttons">
           <button type="button" onClick={handleCreate}>Create</button>
           <button type="button" onClick={handleUpdate}>Update</button>
         </div>
       </form>
 
-      <select onChange={(e) => setFilterStatus(e.target.value)}>
-        <option value="all">Filter by Status</option>
+      <select className="status-filter" onChange={(e) => setFilter(e.target.value)}>
+        <option value="all">All</option>
         <option value="in transit">In Transit</option>
         <option value="delivered">Delivered</option>
         <option value="cancelled">Cancelled</option>
@@ -101,12 +105,12 @@ export default function Parcels() {
           </tr>
         </thead>
         <tbody>
-          {filteredParcels.map((p) => (
+          {filtered.map((p) => (
             <tr key={p.trackingId}>
               <td>{p.trackingId}</td>
               <td>{p.sender}</td>
               <td>{p.receiver}</td>
-              <td className={p.status.replace(/\s/g, "-")}>{p.status}</td>
+              <td><span className={`status ${p.status.replace(/\s/g, "-")}`}>{p.status}</span></td>
               <td>
                 <button onClick={() => handleEdit(p)}>Edit</button>
                 <button onClick={() => handleDelete(p.trackingId)}>Delete</button>
@@ -118,3 +122,5 @@ export default function Parcels() {
     </div>
   );
 }
+
+export default Parcels;
