@@ -1,0 +1,52 @@
+.order-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.upload-section {
+  margin-bottom: 30px;
+}
+
+input[type="file"] {
+  margin-right: 10px;
+}
+
+.filter-section input {
+  margin: 8px;
+  padding: 8px;
+  width: 200px;
+}
+
+.order-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.order-table th,
+.order-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.order-table th {
+  background-color: #f8f8f8;
+}
+
+.success-message {
+  color: green;
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+.upload-section input[type="file"] {
+  margin-right: 10px;
+}
