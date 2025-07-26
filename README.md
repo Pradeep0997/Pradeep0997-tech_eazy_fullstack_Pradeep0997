@@ -1,92 +1,119 @@
-# TechEazy Internship – Zero Mile Delivery System
+# Zero Mile Delivery System — From Warehouse to Doorstep
 
-This is a fullstack Parcel Management System built as part of the TechEazy internship selection process.
+A full-stack MERN-based logistics management system developed as part of the TechEazy internship. The system enables authentication, vendor management, parcel tracking, and delivery order uploads.
 
 ---
 
-## 📁 Project Structure
+## 🌐 Tech Stack
 
-```
-tech_eazy_fullstack_Pradeep0997/
+- **Frontend:** React, Axios, React Router
+- **Backend:** Node.js, Express.js
+- **Database:** PostgreSQL
+- **ORM:** Sequelize
+- **Authentication:** JWT (JSON Web Tokens)
+- **File Upload:** express-fileupload
+- **Others:** dotenv, cors
+
+---
+
+## 📁 Folder Structure
+
+project-root/
 ├── backend/
-│ ├── server.js
-│ ├── parcel/
-│ │ ├── parcelModel.js
-│ │ ├── parcelService.js
-│ │ └── parcelController.js
-│ ├── db/parcel.db
-│ ├── package.json
-│ └── postman_collection.json
+│ ├── controllers/
+│ ├── middleware/
+│ ├── models/
+│ ├── routes/
+│ ├── uploads/
+│ ├── .env
+│ └── server.js
 ├── frontend/
-│ ├── index.html
-│ ├── app.js
-│ └── style.css
+│ ├── public/
+│ ├── src/
+│ │ ├── pages/
+│ │ ├── styles/
+│ │ └── App.jsx
+│ └── package.json
+├── resources/
+│ └── Postman_Collection.json
+└── README.md
 
-```
+
 
 ---
 
-## 🚀 How to Run the Project
+## 🧠 Features
 
-### 🔧 Backend (Node.js + Express + Sequelize + SQLite)
+- 🔐 User login/register with JWT auth
+- 📦 Parcel CRUD (Create, Read, Update, Delete)
+- 🏪 Vendor listing with subscription info
+- 📄 Delivery Order upload (.txt) with file parsing
+- 🔎 Filter and download delivery orders
+- 📂 File upload stored locally in `/uploads`
+- ✅ Protected frontend routes (React Router)
 
-1. Go to the backend folder
-```bash
+---
+
+## 🛠️ Installation
+
+### 📦 Backend Setup
+
+```
 cd backend
 npm install
-npm run dev
-Backend runs at: http://localhost:3000
+Create a .env file inside /backend:
 
-🖥 Frontend (HTML + Axios)
-Open the frontend/index.html in browser (use Live Server or port 80)
+env
+Copy
+Edit
+DB_NAME=techeazy_db
+DB_USER=techeazy_user
+DB_PASS=techeazy_pass
+DB_HOST=localhost
+JWT_SECRET=supersecretkey
+PORT=3000
+Create PostgreSQL DB and user:
 
-If needed:
 
+CREATE USER techeazy_user WITH PASSWORD 'techeazy_pass';
+CREATE DATABASE techeazy_db;
+GRANT ALL PRIVILEGES ON DATABASE techeazy_db TO techeazy_user;
+Run server:
+
+
+node server.js
+Make sure the /uploads folder exists in the backend root for file upload to work.
+
+🖼️ Frontend Setup
 
 cd frontend
-sudo python3 -m http.server 80
-Frontend runs at: http://localhost
-
-```
-
-## 📬 API Endpoints
-Method	Endpoint	Description
-GET	/parcels	List all parcels
-GET	/parcels/:id	Get parcel by tracking ID
-POST	/parcels	Create new parcel
-PUT	/parcels/:id	Update parcel
-DELETE	/parcels/:id	Delete parcel
+npm install
+Start frontend (usually on port 81):
 
 
----
+npm start
+📮 API Endpoints
+Base URL: http://localhost:3000/api
 
-## 📮 Postman Collection
+✅ Auth
+POST /auth/register → Register new user
 
-You can import postman_collection.json in Postman to test the APIs manually.
+POST /auth/login → Login and receive JWT token
 
+📦 Parcels
+GET /parcels
 
----
-## 💡 Tech Stack
+POST /parcels
 
-Node.js
+PUT /parcels/:id
 
-Express
+DELETE /parcels/:id
 
-Sequelize ORM
+🏪 Vendors
+GET /vendors → Requires JWT
 
-SQLite
+🚚 Delivery Orders
+GET /delivery-orders → List all uploaded orders
 
-Axios
-
-HTML, CSS, JavaScript
-
-
-
-## ✍️ Author
-
-
-Settipalle Pradeep Reddy
-
-
-GitHub: Pradeep0997
+POST /delivery-orders/upload → Upload .txt file with order lines
 
