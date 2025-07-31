@@ -31,25 +31,26 @@ tech_eazy_fullstack_Pradeep0997/
 ### 🔧 Backend (Node.js + Express + Sequelize + SQLite)
 
 1. Go to the backend folder
-```bash
+```
 cd backend
 npm install
 npm run dev
 Backend runs at: http://localhost:3000
-
-🖥 Frontend (HTML + Axios)
-Open the frontend/index.html in browser (use Live Server or port 80)
-
-If needed:
+```
+# 🖥 Frontend (React + Axios)
+```
+Open the frontend
 
 
 cd frontend
-sudo python3 -m http.server 80
+
 Frontend runs at: http://localhost
 
 ```
 
 ## 📬 API Endpoints
+
+```
 Method	Endpoint	Description
 GET	/parcels	List all parcels
 GET	/parcels/:id	Get parcel by tracking ID
@@ -57,6 +58,7 @@ POST	/parcels	Create new parcel
 PUT	/parcels/:id	Update parcel
 DELETE	/parcels/:id	Delete parcel
 
+```
 
 ---
 
@@ -78,9 +80,10 @@ SQLite
 
 Axios
 
-HTML, CSS, JavaScript
+React Js, CSS
 
 
+---
 
 ## ✍️ Author
 
